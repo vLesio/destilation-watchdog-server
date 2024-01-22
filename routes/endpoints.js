@@ -5,6 +5,8 @@ const {InfluxDB, Point} = require('@influxdata/influxdb-client')
 const jsonParser = bodyParser.json()
 const firestore = admin.firestore();
 
+const crypto = require("./crypto")
+
 const url = 'http://20.82.177.27:8086'
 const token = process.env.INFLUXDB_TOKEN;
 const influxClient = new InfluxDB({url, token})
@@ -60,6 +62,14 @@ module.exports = function (app) {
         })
     })
 
+    app.get('/debil', async (req, res) => {
+        const certRequest = crypto.generateClientCertificate({commonName: 'dwqdwqdqwsadqw'})
+        console.log(certRequest.csr)
+        console.log(certRequest.privateKey)
+        const cert = crypto.signCSR(certRequest.csr)
+        console.log(cert)
+    })
+
     app.get('/devices/:deviceId/measurements/:period', async (req, res) => {
         const {deviceId, period} = req.params
         console.log(deviceId + " " + period)
@@ -89,7 +99,6 @@ module.exports = function (app) {
                         });
                     }
 
-                    // Uzupełnij wartości temperatury
                     const entry = acc.get(key);
                     if (item._field === 'temperatureColumn') {
                         entry.temperatureColumn = item._value;
