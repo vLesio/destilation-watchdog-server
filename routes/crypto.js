@@ -26,8 +26,8 @@ function generateClientCertificate(userDetails) {
 
 function signCSR(csrPem) {
     // Load your CA key and certificate
-    const caCertPem = fs.readFileSync('/secrets/certs/ca.crt', 'utf8');
-    const caKeyPem = fs.readFileSync('/secrets/certs/ca.key', 'utf8');
+    const caCertPem = fs.readFileSync('/security/certs/ca.crt', 'utf8');
+    const caKeyPem = fs.readFileSync('/security/certs/ca.key', 'utf8');
 
     const caKeyDec = forge.pki.decryptRsaPrivateKey(caKeyPem, process.env.CA_KEY_PASSWORD);
 
