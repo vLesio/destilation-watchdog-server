@@ -29,10 +29,10 @@ function signCSR(csrPem) {
     const caCertPem = fs.readFileSync('/security/certs/ca.crt', 'utf8');
     const caKeyPem = fs.readFileSync('/security/certs/ca.key', 'utf8');
 
-    const caKeyDec = forge.pki.decryptRsaPrivateKey(caKeyPem, process.env.CA_KEY_PASSWORD);
+    // const caKeyDec = forge.pki.decryptRsaPrivateKey(caKeyPem, process.env.CA_KEY_PASSWORD);
 
     const caCert = forge.pki.certificateFromPem(caCertPem);
-    const caKey = forge.pki.privateKeyFromPem(caKeyDec);
+    const caKey = forge.pki.decryptRsaPrivateKey(caKeyPem, process.env.CA_KEY_PASSWORD); //forge.pki.privateKeyFromPem(caKeyDec);
     const csr = forge.pki.certificationRequestFromPem(csrPem);
 
     // Verify CSR
