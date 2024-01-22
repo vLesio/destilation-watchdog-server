@@ -1,0 +1,19 @@
+{
+  "name": "destilation-watchdog-server",
+  "version": "1.0.0",
+  "description": "Server for destilation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patryk Maciek Spolka z.o.o.",
+  "license": "ISC",
+  "dependencies": {
+    "@influxdata/influxdb-client": "^1.33.2",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0",
+    "mqtt": "^5.3.4"
+  }
+}
